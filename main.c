@@ -190,3 +190,22 @@ void DecryptText(char *text)
             text[i] = ((c - 'a' + 1) % 26) + 'a';
     }
 }
+
+// Help screen
+void HelpScreen()
+{
+    system("cls");
+    DisplayHelp();
+    printf("\nPress Enter to return to menu...");
+    getchar();
+}
+
+// Display help
+void DisplayHelp()
+{
+    printf("This is a simple Caesar Cipher program.\n");
+    printf("Encryption shifts each letter 1 position backward.\n");
+    printf("Decryption shifts each letter 1 position forward.\n");
+    printf("Non-letter characters remain unchanged.\n");
+    printf("You can also save/load encrypted text from a file.\n");
+}
