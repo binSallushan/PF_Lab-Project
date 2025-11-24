@@ -209,3 +209,60 @@ void DisplayHelp()
     printf("Non-letter characters remain unchanged.\n");
     printf("You can also save/load encrypted text from a file.\n");
 }
+
+char *InputText()
+{
+    char *input = NULL;
+    int size = 0;
+    int ch;
+
+    while ((ch = getchar()) != '\n' && ch != EOF)
+    {
+        char *newInput = realloc(input, size + 2); // +1 for char +1 for '\0'
+        if (!newInput)
+        {
+            free(input);
+            exit(1);
+        }
+        input = newInput;
+        input[size++] = (char)ch;
+        input[size] = '\0';
+    }
+
+    if (input == NULL)
+    {
+        input = malloc(1);
+        if (!input)
+            exit(1);
+        input[0] = '\0';
+    }
+
+    return input;
+}
+
+int InputYesNo()
+{
+    int choice;
+    while (1)
+    {
+        if (scanf("%d", &choice) != 1)
+        {
+            while (getchar() != '\n')
+                ;
+            continue;
+        }
+        if (choice == 0 || choice == 1)
+            break;
+        printf("Enter 0 or 1: ");
+    }
+    while (getchar() != '\n')
+        ;
+    return choice;
+}
+
+char *InputFileName()
+{
+    printf("Enter file name: ");
+    char *filename = InputText();
+    return filename;
+}
